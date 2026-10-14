@@ -1,0 +1,21 @@
+id;titulo;prioridad;area;estado
+001;Error de acceso;Alta;Sistemas;Abierto
+002;Consulta de factura;Baja;Facturacion;Resuelto
+003;Falla del servidor;Alta;Infraestructura;En_Progreso
+004;Problema con impresora;Media;Sistemas;Abierto
+005;Error en pago;Alta;Facturacion;En_Progreso
+006;Solicitud de usuario;Baja;Sistemas;Resuelto
+007;Caida de red;Alta;Infraestructura;Abierto
+008;Actualizacion de software;Media;Sistemas;En_Progreso
+009;Diferencia en factura;Media;Facturacion;Abierto
+010;Equipo sin conexion;Alta;Infraestructura;En_Progreso
+011;Consulta sobre recibo;Baja;Facturacion;Resuelto
+012;Permisos insuficientes;Media;Sistemas;Abierto
+013;Corte de servicio;Alta;Infraestructura;Resuelto
+014;Error de configuracion;Media;Sistemas;Resuelto
+015;Consulta de vencimiento;Baja;Facturacion;Abierto
+016;Lentitud en la red;Media;Infraestructura;En_Progreso
+017;Bloqueo de cuenta;Alta;Sistemas;Abierto
+018;Solicitud de comprobante;Baja;Facturacion;Resuelto
+019;Problema con correo;Media;Sistemas;Abierto
+020;Falla de conexion VPN;Alta;Infraestructura;En_Progreso
