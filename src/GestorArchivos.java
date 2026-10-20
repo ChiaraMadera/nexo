@@ -15,7 +15,8 @@ public class GestorArchivos {
     /**
      * Lee un CSV en UTF-8 con el formato {@code id;titulo;prioridad;area;estado}.
      * Omite líneas vacías y el encabezado de la primera línea. Avisa y descarta
-     * registros incompletos o con un ID que no sea un entero positivo.
+     * registros incompletos, con un ID que no sea un entero positivo, o con una
+     * prioridad o un estado que no exista.
      *
      * @param ruta ubicación del CSV
      * @return tickets válidos del archivo, en el mismo orden
@@ -63,7 +64,16 @@ public class GestorArchivos {
                     System.out.println("Linea " + numeroLinea + " omitida: el ID debe ser mayor que 0.");
                     continue;
                 }
-                tickets.add(new Ticket(id, campos[1], campos[2], campos[3], campos[4]));
+                Prioridad prioridad;
+                Estado estado;
+                try {
+                    prioridad = Prioridad.desdeTexto(campos[2]);
+                    estado = Estado.desdeTexto(campos[4]);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Linea " + numeroLinea + " omitida: " + e.getMessage());
+                    continue;
+                }
+                tickets.add(new Ticket(id, campos[1], prioridad, campos[3], estado));
             }
         }
         return tickets;

@@ -44,17 +44,16 @@ public class GestorTickets {
     }
 
     /**
-     * Busca por prioridad sin distinguir mayúsculas y minúsculas.
+     * Busca por prioridad.
      *
      * @param prioridad prioridad que se busca
      * @return tickets encontrados, o una lista vacía
      */
-    public ArrayList<Ticket> buscarPorPrioridad(String prioridad) {
+    public ArrayList<Ticket> buscarPorPrioridad(Prioridad prioridad) {
         ArrayList<Ticket> resultados = new ArrayList<>();
 
         for (Ticket ticket : tickets) {
-            if (ticket.getPrioridad().equalsIgnoreCase(
-                    prioridad.trim())) {
+            if (ticket.getPrioridad() == prioridad) {
                 resultados.add(ticket);
             }
         }
@@ -81,15 +80,15 @@ public class GestorTickets {
     }
 
     /**
-     * Busca por estado sin distinguir mayúsculas y minúsculas.
+     * Busca por estado.
      *
      * @param estado estado que se busca
      * @return tickets encontrados, o una lista vacía
      */
-    public ArrayList<Ticket> buscarPorEstado(String estado) {
+    public ArrayList<Ticket> buscarPorEstado(Estado estado) {
         ArrayList<Ticket> resultados = new ArrayList<>();
         for (Ticket ticket : tickets) {
-            if (ticket.getEstado().equalsIgnoreCase(estado.trim())) {
+            if (ticket.getEstado() == estado) {
                 resultados.add(ticket);
             }
         }

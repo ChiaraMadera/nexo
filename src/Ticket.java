@@ -4,14 +4,20 @@
 public class Ticket {
     private final int id;
     private final String titulo;
-    private final String prioridad;
+    private final Prioridad prioridad;
     private final String area;
-    private final String estado;
+    private final Estado estado;
 
     /**
      * Crea un ticket con los datos recibidos.
+     *
+     * @param id        ID numérico del ticket
+     * @param titulo    descripción breve del problema o solicitud
+     * @param prioridad prioridad del ticket
+     * @param area      área responsable
+     * @param estado    estado actual del ticket
      */
-    public Ticket(int id, String titulo, String prioridad, String area, String estado) {
+    public Ticket(int id, String titulo, Prioridad prioridad, String area, Estado estado) {
         this.id = id;
         this.titulo = titulo;
         this.prioridad = prioridad;
@@ -36,7 +42,7 @@ public class Ticket {
     /**
      * @return prioridad del ticket
      */
-    public String getPrioridad() {
+    public Prioridad getPrioridad() {
         return prioridad;
     }
 
@@ -48,18 +54,21 @@ public class Ticket {
     }
 
     /**
-     * @return estado del ticket
+     * @return estado actual del ticket
      */
-    public String getEstado() {
+    public Estado getEstado() {
         return estado;
     }
 
     /**
      * Prepara los datos para mostrarlos en consola o guardarlos en un reporte.
+     * La prioridad y el estado se imprimen con su etiqueta, así que el formato
+     * del reporte no cambia.
      *
      * @return datos del ticket separados por barras verticales
      */
-    public String toString(){
+    @Override
+    public String toString() {
         return id + " | " + titulo + " | " + prioridad + " | " + area + " | " + estado;
     }
 }

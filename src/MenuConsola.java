@@ -58,20 +58,19 @@ public class MenuConsola {
                             continuar = false;
                             break;
                         }
-                        String prioridad = scanner.nextLine().trim();
-                        if (prioridad.isEmpty()) {
+                        String textoPrioridad = scanner.nextLine().trim();
+                        if (textoPrioridad.isEmpty()) {
                             System.out.println("La busqueda no puede estar vacia.");
                             break;
                         }
-                        if (!prioridad.equalsIgnoreCase("Alta")
-                                && !prioridad.equalsIgnoreCase("Media")
-                                && !prioridad.equalsIgnoreCase("Baja")) {
+                        try {
+                            Prioridad prioridad = Prioridad.desdeTexto(textoPrioridad);
+                            resultados = gestor.buscarPorPrioridad(prioridad);
+                            consulta = "Prioridad: " + prioridad;
+                            mostrarTickets(resultados);
+                        } catch (IllegalArgumentException e) {
                             System.out.println("Prioridad invalida. Use Alta, Media o Baja.");
-                            break;
                         }
-                        resultados = gestor.buscarPorPrioridad(prioridad);
-                        consulta = "Prioridad: " + prioridad;
-                        mostrarTickets(resultados);
                         break;
                     case "3":
                         System.out.print("Ingrese el nombre completo del area: ");
@@ -118,14 +117,19 @@ public class MenuConsola {
                             continuar = false;
                             break;
                         }
-                        String estado = scanner.nextLine().trim();
-                        if (estado.isEmpty()) {
+                        String textoEstado = scanner.nextLine().trim();
+                        if (textoEstado.isEmpty()) {
                             System.out.println("La busqueda no puede estar vacia.");
                             break;
                         }
-                        resultados = gestor.buscarPorEstado(estado);
-                        consulta = "Estado: " + estado;
-                        mostrarTickets(resultados);
+                        try {
+                            Estado estado = Estado.desdeTexto(textoEstado);
+                            resultados = gestor.buscarPorEstado(estado);
+                            consulta = "Estado: " + estado;
+                            mostrarTickets(resultados);
+                        } catch (IllegalArgumentException e) {
+                            System.out.println("Estado invalido. Use Abierto, En_Progreso o Resuelto.");
+                        }
                         break;
                     case "6":
                         if (resultados.isEmpty()) {

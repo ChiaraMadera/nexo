@@ -96,9 +96,9 @@ id;titulo;prioridad;area;estado
 | --- | --- |
 | `id` | Entero positivo que identifica al ticket. |
 | `titulo` | Descripción breve del problema o solicitud. |
-| `prioridad` | Alta, Media o Baja en los datos de ejemplo. |
+| `prioridad` | Alta, Media o Baja. |
 | `area` | Sistemas, Facturacion o Infraestructura en los datos de ejemplo. |
-| `estado` | Abierto, En_Progreso o Resuelto en los datos de ejemplo. |
+| `estado` | Abierto, En_Progreso o Resuelto. |
 
 Los tickets se mantienen editando el CSV. Los cambios se leen **al volver a iniciar el programa**; no se recarga el archivo durante una sesión.
 
@@ -107,6 +107,7 @@ Los tickets se mantienen editando el CSV. Los cambios se leen **al volver a inic
 - Se omiten las líneas vacías y el encabezado de la primera línea.
 - Cada registro debe tener cinco campos completos.
 - El ID debe ser un entero mayor que cero, dentro del rango de `int`.
+- La prioridad y el estado deben ser uno de los valores admitidos; no distinguen mayúsculas y minúsculas.
 - Los espacios al principio y al final de cada campo se eliminan.
 - Una fila incorrecta genera un aviso y se continúa con la siguiente.
 
@@ -154,6 +155,8 @@ Nexo/
 │   ├── Main.java
 │   ├── MenuConsola.java
 │   ├── Ticket.java
+│   ├── Prioridad.java
+│   ├── Estado.java
 │   ├── GestorTickets.java
 │   └── GestorArchivos.java
 ├── data/
@@ -167,6 +170,8 @@ Nexo/
 | `Main` | Cargar los datos, preparar los gestores e iniciar el menú. |
 | `MenuConsola` | Mostrar opciones, validar la entrada y presentar resultados. |
 | `Ticket` | Representar los datos de un ticket mediante atributos privados y getters. |
+| `Prioridad` | Enumeración con las prioridades válidas y su etiqueta. |
+| `Estado` | Enumeración con los estados válidos y su etiqueta. |
 | `GestorTickets` | Listar y buscar los tickets guardados en un `ArrayList`. |
 | `GestorArchivos` | Leer el CSV y escribir el reporte con `FileReader`, `FileWriter` y buffers. |
 
@@ -177,6 +182,7 @@ Los archivos se cierran automáticamente mediante `try` con recursos. Los errore
 ## Contenidos aplicados
 
 - Clases, objetos, constructores y encapsulamiento.
+- Enumeraciones (`enum`) para representar valores válidos.
 - Variables, tipos de datos y operadores.
 - Condicionales, `switch`, ciclos `while` y `for`.
 - Colecciones `ArrayList`.
