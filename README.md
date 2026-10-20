@@ -110,7 +110,7 @@ Los tickets se mantienen editando el CSV. Los cambios se leen **al volver a inic
 
 ### Validaciones de lectura
 
-- Se omiten las líneas vacías y el encabezado de la primera línea.
+- Se omiten las líneas vacías y la línea de encabezado, que empieza con `id`.
 - Cada registro debe tener cinco campos completos.
 - El ID debe ser un entero mayor que cero, dentro del rango de `int`.
 - La prioridad y el estado deben ser uno de los valores admitidos; no distinguen mayúsculas y minúsculas.

@@ -34,7 +34,7 @@ public class GestorArchivos {
                     continue;
                 }
                 String[] campos = linea.split(";", -1);
-                if (numeroLinea == 1 && campos[0].trim().equalsIgnoreCase("id")) {
+                if (campos[0].trim().equalsIgnoreCase("id")) {
                     continue;
                 }
                 if (campos.length != 5) {
