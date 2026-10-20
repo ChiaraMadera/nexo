@@ -2,7 +2,7 @@
 
 Aplicación de consola en **Java** para consultar tickets de soporte almacenados en un archivo CSV y guardar los resultados en un reporte de texto.
 
-Desarrollada como trabajo final del curso de Java de **CILSA, edición 2026**. El proyecto aplica programación orientada a objetos, colecciones, validaciones y manejo de archivos, con una estructura sencilla y responsabilidades separadas.
+Trabajo final del curso de Java de **CILSA, edición 2026**.
 
 ## Funcionalidades
 
@@ -14,7 +14,11 @@ Desarrollada como trabajo final del curso de Java de **CILSA, edición 2026**. E
 - Exportar el último listado o búsqueda con resultados.
 - Informar entradas incorrectas, consultas sin coincidencias y errores de archivos.
 
-Las búsquedas por prioridad, área y estado **no distinguen mayúsculas y minúsculas**. La búsqueda por área es exacta: `sistemas` encuentra `Sistemas`, pero `sist` no. Las tildes deben coincidir con las del dato almacenado.
+Tres reglas de búsqueda:
+
+- **Mayúsculas**: prioridad, área y estado no distinguen mayúsculas y minúsculas.
+- **Coincidencia exacta**: la búsqueda por área pide el nombre completo. `sistemas` encuentra `Sistemas`, pero `sist` no.
+- **Tildes**: deben coincidir con las del dato almacenado. Si el CSV guarda `Facturacion`, buscar `Facturación` no lo encuentra.
 
 ## Requisitos
 
@@ -25,14 +29,22 @@ No requiere base de datos, bibliotecas externas, Maven ni Gradle.
 
 ## Cómo ejecutar
 
+> **La terminal tiene que estar en la raíz del proyecto**, donde están `src` y `data`. `Main` busca `data/tickets.csv` de forma relativa: si lo ejecutás desde otra carpeta, falla con `No se pudo leer el CSV`.
+
 ### Desde la terminal
 
-Cloná o descargá el repositorio y abrí una terminal en la carpeta del proyecto, donde están `src` y `data`.
-
-En Linux, macOS o la consola CMD de Windows:
+En Linux, macOS o Git Bash:
 
 ```sh
 javac -encoding UTF-8 -d out src/*.java
+java -cp out Main
+```
+
+En Windows (CMD):
+
+```bat
+dir /b src\*.java > fuentes.txt
+javac -encoding UTF-8 -d out @fuentes.txt
 java -cp out Main
 ```
 
@@ -44,7 +56,7 @@ javac -encoding UTF-8 -d out $fuentes
 java -cp out Main
 ```
 
-La compilación crea la carpeta `out` con los archivos `.class`.
+La compilación crea la carpeta `out` con los archivos `.class`. En bash y en PowerShell el comodín lo expande el shell; `javac` no lo hace por su cuenta, por eso CMD necesita el archivo de argumentos.
 
 ### Desde IntelliJ IDEA
 
@@ -53,7 +65,7 @@ La compilación crea la carpeta `out` con los archivos `.class`.
 3. Verificá que `src` esté marcada como **Sources Root**.
 4. Ejecutá el método `main` de `Main.java`.
 
-**La carpeta de trabajo debe ser la raíz del proyecto**, porque el programa busca los datos en `data/tickets.csv`. En IntelliJ se puede comprobar en la configuración de ejecución, en **Working directory**.
+En IntelliJ, verificá que **Working directory** apunte a la raíz del proyecto en la configuración de ejecución.
 
 ## Uso
 
@@ -72,13 +84,7 @@ Al iniciar, NEXO carga los registros válidos y muestra este menú:
 Seleccione una opcion:
 ```
 
-Por ejemplo, para consultar un ticket y exportarlo:
-
-1. Elegí la opción **4**.
-2. Ingresá el ID **1**.
-3. Revisá el resultado mostrado en consola.
-4. Elegí la opción **6** para guardar el reporte.
-5. Elegí la opción **7** para salir.
+Para probar el flujo completo: opción **4**, ID **1**, y después opción **6** para guardar el reporte.
 
 También podés buscar `alta` con la opción 2 o `Sistemas` con la opción 3. Para buscar por estado, usá la opción 5 y escribí, por ejemplo, `en_progreso`. El menú vuelve a mostrarse después de cada operación.
 
