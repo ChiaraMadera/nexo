@@ -1,5 +1,5 @@
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Carga los tickets e inicia la aplicación NEXO.
@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) {
         GestorArchivos archivos = new GestorArchivos();
         try {
-            ArrayList<Ticket> tickets = archivos.cargarTickets(ARCHIVO_DATOS);
+            List<Ticket> tickets = archivos.cargarTickets(ARCHIVO_DATOS);
             System.out.println("Se cargaron " + tickets.size() + " tickets.");
             GestorTickets gestor = new GestorTickets(tickets);
             MenuConsola menu = new MenuConsola(gestor, archivos);

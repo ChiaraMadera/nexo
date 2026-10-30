@@ -1,19 +1,21 @@
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Permite listar tickets y buscarlos por ID, prioridad, área o estado.
  */
 public class GestorTickets {
 
-    private final ArrayList<Ticket> tickets;
+    private final List<Ticket> tickets;
 
     /**
-     * Recibe los tickets que se van a consultar.
+     * Recibe los tickets que se van a consultar. Guarda una copia de la lista,
+     * por lo que los cambios posteriores en la lista original no afectan al gestor.
      *
      * @param tickets lista de tickets cargados
      */
-    public GestorTickets(ArrayList<Ticket> tickets) {
-        this.tickets = tickets;
+    public GestorTickets(List<Ticket> tickets) {
+        this.tickets = new ArrayList<>(tickets);
     }
 
     /**
@@ -21,7 +23,7 @@ public class GestorTickets {
      *
      * @return lista de todos los tickets
      */
-    public ArrayList<Ticket> listarTodos() {
+    public List<Ticket> listarTodos() {
         return new ArrayList<>(tickets);
     }
 
@@ -31,8 +33,8 @@ public class GestorTickets {
      * @param id ID que se busca
      * @return lista con el ticket encontrado, o vacía si no existe
      */
-    public ArrayList<Ticket> buscarPorId(int id) {
-        ArrayList<Ticket> resultados = new ArrayList<>();
+    public List<Ticket> buscarPorId(int id) {
+        List<Ticket> resultados = new ArrayList<>();
 
         for (Ticket ticket : tickets) {
             if (ticket.getId() == id) {
@@ -49,8 +51,8 @@ public class GestorTickets {
      * @param prioridad prioridad que se busca
      * @return tickets encontrados, o una lista vacía
      */
-    public ArrayList<Ticket> buscarPorPrioridad(Prioridad prioridad) {
-        ArrayList<Ticket> resultados = new ArrayList<>();
+    public List<Ticket> buscarPorPrioridad(Prioridad prioridad) {
+        List<Ticket> resultados = new ArrayList<>();
 
         for (Ticket ticket : tickets) {
             if (ticket.getPrioridad() == prioridad) {
@@ -67,8 +69,8 @@ public class GestorTickets {
      * @param area nombre del área que se busca
      * @return tickets encontrados, o una lista vacía
      */
-    public ArrayList<Ticket> buscarPorArea(String area) {
-        ArrayList<Ticket> resultados = new ArrayList<>();
+    public List<Ticket> buscarPorArea(String area) {
+        List<Ticket> resultados = new ArrayList<>();
 
         for (Ticket ticket : tickets) {
             if (ticket.getArea().equalsIgnoreCase(area.trim())) {
@@ -85,8 +87,8 @@ public class GestorTickets {
      * @param estado estado que se busca
      * @return tickets encontrados, o una lista vacía
      */
-    public ArrayList<Ticket> buscarPorEstado(Estado estado) {
-        ArrayList<Ticket> resultados = new ArrayList<>();
+    public List<Ticket> buscarPorEstado(Estado estado) {
+        List<Ticket> resultados = new ArrayList<>();
         for (Ticket ticket : tickets) {
             if (ticket.getEstado() == estado) {
                 resultados.add(ticket);

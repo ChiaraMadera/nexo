@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -9,7 +10,7 @@ public class MenuConsola {
     private static final String ARCHIVO_REPORTE = "reportes/ultima_consulta.txt";
     private final GestorTickets gestor;
     private final GestorArchivos archivos;
-    private ArrayList<Ticket> resultados = new ArrayList<>();
+    private List<Ticket> resultados = new ArrayList<>();
     private String consulta = "";
 
     /**
@@ -225,7 +226,7 @@ public class MenuConsola {
     /**
      * Muestra los tickets encontrados y su cantidad.
      */
-    private void mostrarTickets(ArrayList<Ticket> tickets) {
+    private void mostrarTickets(List<Ticket> tickets) {
         if (tickets.isEmpty()) {
             System.out.println("No se encontraron tickets.");
             return;

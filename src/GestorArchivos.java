@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Lee tickets desde un CSV y guarda reportes en archivos de texto.
@@ -22,8 +23,8 @@ public class GestorArchivos {
      * @return tickets válidos del archivo, en el mismo orden
      * @throws IOException si el archivo no existe o no se puede leer
      */
-    public ArrayList<Ticket> cargarTickets(String ruta) throws IOException {
-        ArrayList<Ticket> tickets = new ArrayList<>();
+    public List<Ticket> cargarTickets(String ruta) throws IOException {
+        List<Ticket> tickets = new ArrayList<>();
 
         try (BufferedReader lector = new BufferedReader(new FileReader(ruta, StandardCharsets.UTF_8))) {
             String linea;
@@ -88,7 +89,7 @@ public class GestorArchivos {
      * @param descripcion descripción de la consulta
      * @throws IOException si no se puede crear la carpeta o escribir el reporte
      */
-    public void exportarResultados(ArrayList<Ticket> resultados, String ruta, String descripcion) throws IOException {
+    public void exportarResultados(List<Ticket> resultados, String ruta, String descripcion) throws IOException {
         File destino = new File(ruta);
         File carpeta = destino.getParentFile();
         if (carpeta != null && !carpeta.isDirectory() && !carpeta.mkdirs()) {
