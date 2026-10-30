@@ -53,14 +53,12 @@ public class MenuConsola {
                         mostrarTickets(resultados);
                         break;
                     case "2":
-                        System.out.print("Ingrese prioridad (Alta, Media o Baja): ");
-                        if (!scanner.hasNextLine()) {
+                        String textoPrioridad = pedirTexto(scanner, "Ingrese prioridad (Alta, Media o Baja): ");
+                        if (textoPrioridad == null) {
                             continuar = false;
                             break;
                         }
-                        String textoPrioridad = scanner.nextLine().trim();
                         if (textoPrioridad.isEmpty()) {
-                            System.out.println("La busqueda no puede estar vacia.");
                             break;
                         }
                         try {
@@ -73,14 +71,12 @@ public class MenuConsola {
                         }
                         break;
                     case "3":
-                        System.out.print("Ingrese el nombre completo del area: ");
-                        if (!scanner.hasNextLine()) {
+                        String area = pedirTexto(scanner, "Ingrese el nombre completo del area: ");
+                        if (area == null) {
                             continuar = false;
                             break;
                         }
-                        String area = scanner.nextLine().trim();
                         if (area.isEmpty()) {
-                            System.out.println("La busqueda no puede estar vacia.");
                             break;
                         }
                         resultados = gestor.buscarPorArea(area);
@@ -88,14 +84,12 @@ public class MenuConsola {
                         mostrarTickets(resultados);
                         break;
                     case "4":
-                        System.out.print("Ingrese el ID numerico: ");
-                        if (!scanner.hasNextLine()) {
+                        String textoId = pedirTexto(scanner, "Ingrese el ID numerico: ");
+                        if (textoId == null) {
                             continuar = false;
                             break;
                         }
-                        String textoId = scanner.nextLine().trim();
                         if (textoId.isEmpty()) {
-                            System.out.println("La busqueda no puede estar vacia.");
                             break;
                         }
                         try {
@@ -112,14 +106,12 @@ public class MenuConsola {
                         }
                         break;
                     case "5":
-                        System.out.print("Ingrese estado (Abierto, En_Progreso o Resuelto): ");
-                        if (!scanner.hasNextLine()) {
+                        String textoEstado = pedirTexto(scanner, "Ingrese estado (Abierto, En_Progreso o Resuelto): ");
+                        if (textoEstado == null) {
                             continuar = false;
                             break;
                         }
-                        String textoEstado = scanner.nextLine().trim();
                         if (textoEstado.isEmpty()) {
-                            System.out.println("La busqueda no puede estar vacia.");
                             break;
                         }
                         try {
@@ -157,7 +149,26 @@ public class MenuConsola {
         }
     }
 
-
+    /**
+     * Muestra un mensaje y lee la respuesta del usuario sin espacios en los extremos.
+     * Si la respuesta está vacía, avisa y devuelve una cadena vacía.
+     *
+     * @param scanner lector de la entrada de consola
+     * @param mensaje texto que se muestra antes de leer
+     * @return el texto ingresado, una cadena vacía si no escribió nada, o {@code null}
+     *         si la entrada terminó
+     */
+    private String pedirTexto(Scanner scanner, String mensaje) {
+        System.out.print(mensaje);
+        if (!scanner.hasNextLine()) {
+            return null;
+        }
+        String texto = scanner.nextLine().trim();
+        if (texto.isEmpty()) {
+            System.out.println("La busqueda no puede estar vacia.");
+        }
+        return texto;
+    }
 
     /**
      * Muestra los tickets encontrados y su cantidad.
