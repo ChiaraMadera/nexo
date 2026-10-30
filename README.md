@@ -72,7 +72,7 @@ En IntelliJ, verificá que **Working directory** apunte a la raíz del proyecto 
 Al iniciar, NEXO carga los registros válidos y muestra este menú:
 
 ```text
-*** NEXO - Soporte de Tickets ***
+==== NEXO - Soporte de Tickets ====
 1. Listar tickets
 2. Buscar por prioridad
 3. Buscar por area
@@ -80,7 +80,7 @@ Al iniciar, NEXO carga los registros válidos y muestra este menú:
 5. Buscar por estado
 6. Guardar resultados
 7. Salir
-*********************************
+====================================
 Seleccione una opcion:
 ```
 
