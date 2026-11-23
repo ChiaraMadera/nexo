@@ -4,12 +4,23 @@
  * <p>Cada constante lleva la etiqueta que se usa en el CSV, en la consola y en
  * los reportes. El nombre de la constante queda como detalle interno de Java.</p>
  */
+import java.util.HashMap;
+import java.util.Map;
+
 public enum Prioridad {
     ALTA("Alta"),
     MEDIA("Media"),
     BAJA("Baja");
 
     private final String etiqueta;
+
+    private static final Map<String, Prioridad> POR_ETIQUETA = new HashMap<>();
+
+    static {
+        for (Prioridad p : values()) {
+            POR_ETIQUETA.put(p.etiqueta.toLowerCase(), p);
+        }
+    }
 
     Prioridad(String etiqueta) {
         this.etiqueta = etiqueta;
@@ -31,13 +42,12 @@ public enum Prioridad {
      * @throws IllegalArgumentException si el texto no corresponde a ninguna prioridad
      */
     public static Prioridad desdeTexto(String texto) {
-        String buscado = texto.trim();
-        for (Prioridad prioridad : values()) {
-            if (prioridad.etiqueta.equalsIgnoreCase(buscado)) {
-                return prioridad;
-            }
+        String buscado = texto.trim().toLowerCase();
+        Prioridad resultado = POR_ETIQUETA.get(buscado);
+        if (resultado == null) {
+            throw new IllegalArgumentException("Prioridad desconocida: " + texto.trim());
         }
-        throw new IllegalArgumentException("Prioridad desconocida: " + buscado);
+        return resultado;
     }
 
     /**
