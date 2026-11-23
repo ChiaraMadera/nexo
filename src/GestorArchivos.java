@@ -6,7 +6,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Lee tickets desde un CSV y guarda reportes en archivos de texto.
@@ -25,6 +27,7 @@ public class GestorArchivos {
      */
     public List<Ticket> cargarTickets(String ruta) throws IOException {
         List<Ticket> tickets = new ArrayList<>();
+        Set<Integer> idsVistos = new HashSet<>();
 
         try (BufferedReader lector = new BufferedReader(new FileReader(ruta, StandardCharsets.UTF_8))) {
             String linea;
@@ -63,6 +66,10 @@ public class GestorArchivos {
                 }
                 if (id <= 0) {
                     System.out.println("Linea " + numeroLinea + " omitida: el ID debe ser mayor que 0.");
+                    continue;
+                }
+                if (!idsVistos.add(id)) {
+                    System.out.println("Linea " + numeroLinea + " omitida: ID duplicado (" + id + ").");
                     continue;
                 }
                 Prioridad prioridad;
