@@ -1,6 +1,8 @@
 /**
  * Representa un ticket de soporte con su ID, título, prioridad, área y estado.
  */
+import java.util.Objects;
+
 public class Ticket {
     private final int id;
     private final String titulo;
@@ -18,11 +20,43 @@ public class Ticket {
      * @param estado    estado actual del ticket
      */
     public Ticket(int id, String titulo, Prioridad prioridad, String area, Estado estado) {
+        if (id <= 0) {
+            throw new IllegalArgumentException("El ID debe ser mayor que 0.");
+        }
+        Objects.requireNonNull(prioridad, "La prioridad no puede ser null.");
+        Objects.requireNonNull(estado, "El estado no puede ser null.");
+        String tituloLimpio = Objects.requireNonNull(titulo, "El titulo no puede ser null.").trim();
+        String areaLimpia = Objects.requireNonNull(area, "El area no puede ser null.").trim();
+        if (tituloLimpio.isEmpty()) {
+            throw new IllegalArgumentException("El titulo no puede estar vacio.");
+        }
+        if (areaLimpia.isEmpty()) {
+            throw new IllegalArgumentException("El area no puede estar vacia.");
+        }
         this.id = id;
-        this.titulo = titulo;
+        this.titulo = tituloLimpio;
         this.prioridad = prioridad;
-        this.area = area;
+        this.area = areaLimpia;
         this.estado = estado;
+    }
+
+    /**
+     * Dos tickets son iguales si tienen el mismo ID.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Ticket)) {
+            return false;
+        }
+        return id == ((Ticket) o).id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(id);
     }
 
     /**
