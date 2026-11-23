@@ -1,10 +1,9 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -29,7 +28,8 @@ public class GestorArchivos {
         List<Ticket> tickets = new ArrayList<>();
         Set<Integer> idsVistos = new HashSet<>();
 
-        try (BufferedReader lector = new BufferedReader(new FileReader(ruta, StandardCharsets.UTF_8))) {
+        Path origen = Path.of(ruta);
+        try (BufferedReader lector = Files.newBufferedReader(origen, StandardCharsets.UTF_8)) {
             String linea;
             int numeroLinea = 0;
             while ((linea = lector.readLine()) != null) {
@@ -97,12 +97,12 @@ public class GestorArchivos {
      * @throws IOException si no se puede crear la carpeta o escribir el reporte
      */
     public void exportarResultados(List<Ticket> resultados, String ruta, String descripcion) throws IOException {
-        File destino = new File(ruta);
-        File carpeta = destino.getParentFile();
-        if (carpeta != null && !carpeta.isDirectory() && !carpeta.mkdirs()) {
-            throw new IOException("No se pudo crear la carpeta de reportes.");
+        Path destino = Path.of(ruta);
+        Path carpeta = destino.getParent();
+        if (carpeta != null && !Files.isDirectory(carpeta)) {
+            Files.createDirectories(carpeta);
         }
-        try (BufferedWriter escritor = new BufferedWriter(new FileWriter(destino, StandardCharsets.UTF_8))) {
+        try (BufferedWriter escritor = Files.newBufferedWriter(destino, StandardCharsets.UTF_8)) {
             escritor.write("NEXO - Reporte de tickets");
             escritor.newLine();
             escritor.write("Consulta: " + descripcion);

@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Permite listar tickets y buscarlos por ID, prioridad, área o estado.
@@ -7,6 +9,7 @@ import java.util.List;
 public class GestorTickets {
 
     private final List<Ticket> tickets;
+    private final Map<Integer, Ticket> porId;
 
     /**
      * Recibe los tickets que se van a consultar. Guarda una copia de la lista,
@@ -16,6 +19,10 @@ public class GestorTickets {
      */
     public GestorTickets(List<Ticket> tickets) {
         this.tickets = new ArrayList<>(tickets);
+        this.porId = new HashMap<>();
+        for (Ticket ticket : this.tickets) {
+            porId.put(ticket.getId(), ticket);
+        }
     }
 
     /**
@@ -35,13 +42,10 @@ public class GestorTickets {
      */
     public List<Ticket> buscarPorId(int id) {
         List<Ticket> resultados = new ArrayList<>();
-
-        for (Ticket ticket : tickets) {
-            if (ticket.getId() == id) {
-                resultados.add(ticket);
-            }
+        Ticket encontrado = porId.get(id);
+        if (encontrado != null) {
+            resultados.add(encontrado);
         }
-
         return resultados;
     }
 
